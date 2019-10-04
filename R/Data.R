@@ -27,20 +27,29 @@
 #' 269, 1257–1260. https://doi.org/10.1126/science.269.5228.1257}
 #' }
 #' @details The model was used by de Ruiter et al. (1993) to model nitrogen mineralization rates.
-#' This data comes from soil resulted from conventional farming practice. This package also
-#' includes the same food web model with data of soil resulting from integrated farming;
+#' This data comes from soil resulting from conventional farming practice. This package also
+#' includes the same food web model with soil data resulting from integrated farming;
 #' meaning reduced input of inorganic fertilizer, pesticides, and soil tillage.
 #' \cr
 #' \cr
-#' Annual feeding rates are calculated as \eqn{\frac{MR * BM + P}{AE * GE}}, where MR is natural mortality rate
-#' (yr-1), BM is biomass (kg C ha-1), P is death rate due to predation (kg C ha-1 yr-1),
-#' AE is assimilation rate i.e. assimilated carbon per unit consumed carbon,
-#' GE is growth (production) efficiency i.e. biomass-C production per unit assimilated carbon.
+#' Annual feeding rates are calculated as
+#' \eqn{F = \frac{MR * BM + P}{AE * GE}},
+#' where MR is natural mortality rate #' (yr-1), BM is biomass (kg C ha-1),
+#' P is death rate due to predation (kg C ha-1 yr-1), #' AE is assimilation rate i.e.
+#' assimilated carbon per unit consumed carbon, #' GE is growth (production) efficiency i.e.
+#' biomass-C production per unit assimilated carbon.
+#' Feeding rates per prey type i (if there are multiple) is
+#' \eqn{Fi = \frac{Wi * BMi}{\sum_{j=1}^{n}{Wj * BMj}} * F},
+#' where Wi is the preference for prey type i relative to other prey types, and
+#' n is the number of prey types.
+#' The model is then solved by top-down mass-balancing, starting at the top of the food chain
+#' where no predation occurs. Then sequentially moving down the food web for compartments for
+#' which predation rates have been determined.
 #' Therefore, in this model, excretion and respiration flows are not explicitly modeled, but
 #' are included in the feeding rates.
 #' \cr
 #' \cr
 #' Physiological values used in this food web are largely similar to physiological values
-#' used in other soil food webs.
+#' used in other soil food webs. Feeding preference values are taken from Hunt et al. 1987.
 #' @seealso LovinkhoeveExpFarmIF
 "LovinkhoeveExpFarmCP"
