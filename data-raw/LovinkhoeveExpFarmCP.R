@@ -22,7 +22,7 @@ compartments = c(
   "Predatory_mites"
 )
 
-# Biomasses kg ha-1
+# Biomasses kg C ha-1
 BM = c(
   2500,
   300,
@@ -110,7 +110,7 @@ GE = c(
   0.35
 )
 
-# kg ha-1 yr-1
+# kg C ha-1 yr-1
 FM <- matrix(
   0,
   nrow = length(compartments),
@@ -168,13 +168,13 @@ rownames(FM) <- compartments
 colnames(FM) <- compartments
 
 # Create model list
-LovinkhoeveExpFarmCP <- list(c(
+LovinkhoeveExpFarmCP <- list(
   type = "EF",
   FM = FM,
   BM = BM,
   AE = AE,
   GE = GE,
   MR = MR
-))
+)
 
 usethis::use_data(LovinkhoeveExpFarmCP, overwrite = TRUE)
