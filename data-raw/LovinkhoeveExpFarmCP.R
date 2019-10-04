@@ -110,6 +110,7 @@ GE = c(
   0.35
 )
 
+# kg ha-1 yr-1
 FM <- matrix(
   0,
   nrow = length(compartments),
@@ -172,7 +173,8 @@ LovinkhoeveExpFarmCP <- list(c(
   FM = FM,
   BM = BM,
   AE = AE,
-  GE = GE
+  GE = GE,
+  MR = MR
 ))
 
 usethis::use_data(LovinkhoeveExpFarmCP, overwrite = TRUE)
