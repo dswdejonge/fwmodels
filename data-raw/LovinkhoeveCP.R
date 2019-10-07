@@ -224,8 +224,15 @@ if(T){
   PM["Nematophagous_mites", "Predatory_mites"]           <- W.arthro_mite
   PM["Predatory_collembola", "Predatory_mites"]          <- W.arthro_mite
 }
-
 FM2 <- topDownBalancing(PM, MR, BM, AE, GE)
+
+
+# Excretion and mortality back into detritus are modeled implicitely,
+# but useful to include in the Flow matrix as flows from compartments
+# back into detritus.
+# Feedback to detritus is excretion (1-AE)*consumption plus mortality MR * BM.
+FM[,"Detritus"] <- (1-AE)*colSums(FM) + MR*BM
+FM2[,"Detritus"] <- (1-AE)*colSums(FM2) + MR*BM
 
 # Create model list
 ## Values from figure
