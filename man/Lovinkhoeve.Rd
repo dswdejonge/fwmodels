@@ -29,30 +29,37 @@ LovinkhoeveCP2
 LovinkhoeveIF
 }
 \description{
-Energy flux carbon-based models of the soil food web at the Lovinkhoeve Experimental Farm
+Carbon-based energy flux models of the soil food web at the Lovinkhoeve Experimental Farm
 (Marknesse, the Netherlands) for both conventional practice and integrated farming.
 Includes flow matrix, biomasses, assimilation and growth efficiencies, and natural
 death rates.
 }
 \details{
-The model was used by de Ruiter et al. (1993) to model nitrogen mineralization rates.
-This data comes from soil resulting from conventional farming practice. This package also
-includes the same food web model with soil data resulting from integrated farming;
-meaning reduced input of inorganic fertilizer, pesticides, and soil tillage.
+The soil food web at the Lovinkhoeve Experimental Farm was constructed for
+farming according to conventional practice (CP) and for integrated farming practice (IF),
+the latter meaning reduced input of inorganic fertilizer, pesticides, and soil tillage.
+The flow values for \code{LovinkhoeveCP} are taken from the figure in de Ruiter et al. (1995),
+whereas the flow values for \code{LovinkhoeveCP2} are calculated from the given data by
+top-down balancing. The flow matrices are very similar, but not exactly equal, probably
+due to rounding errors. The flow values for \code{LovinkhoeveIF} are calculated with
+top-down balancing.
 \cr
 \cr
 Annual feeding rates are calculated as
 \eqn{F = \frac{MR * BM + P}{AE * GE}},
-where MR is natural mortality rate #' (yr-1), BM is biomass (kg C ha-1),
-P is death rate due to predation (kg C ha-1 yr-1), #' AE is assimilation rate i.e.
-assimilated carbon per unit consumed carbon, #' GE is growth (production) efficiency i.e.
-biomass-C production per unit assimilated carbon.
+where MR is natural mortality rate #' (yr-1),
+BM is biomass (kg C ha-1),
+P is death rate due to predation (kg C ha-1 yr-1),
+AE is assimilation rate i.e. assimilated carbon per unit consumed carbon,
+GE is growth (production) efficiency i.e. biomass-C production per unit assimilated carbon.
 Feeding rates per prey type i (if there are multiple) is
 \eqn{Fi = \frac{Wi * BMi}{\sum_{j=1}^{n}{Wj * BMj}} * F},
 where Wi is the preference for prey type i relative to other prey types, and
 n is the number of prey types.
+\cr
+\cr
 The model is then solved by top-down mass-balancing, starting at the top of the food chain
-where no predation occurs. Then sequentially moving down the food web for compartments for
+where no predation occurs, then sequentially moving down the food web to compartments for
 which predation rates have been determined.
 Therefore, in this model, excretion and respiration flows are not explicitly modeled, but
 are included in the feeding rates.
@@ -60,6 +67,9 @@ are included in the feeding rates.
 \cr
 Physiological values used in this food web are largely similar to physiological values
 used in other soil food webs. Feeding preference values are taken from Hunt et al. 1987.
+Biomasses for detritus and roots could not be retraced in literature, so the biomass values
+as reported in the figure in de Ruiter et al. (1995), are used for both the conventional
+practice and integrated farming model.
 }
 \references{
 \itemize{
@@ -69,9 +79,14 @@ https://doi.org/10.1007/BF00011055}
 \item{de Ruiter, P.C., Neutel, A.M., Moore, J.C., 1995. Energetics,
 Patterns of Interaction Strengths, and Stability in Real Ecosystems. Science (80-. ).
 269, 1257–1260. https://doi.org/10.1126/science.269.5228.1257}
+\item{Hunt, H.W., Coleman, D.C., Ingham, E.R., Ingham, R.E., Elliott, E.T., Moore, J.C.,
+Rose, S.L., Reid, C.P.P., Morley, C.R.I., 1987. The detrital food web in a shortgrass prairie.
+ Biol 3, 57–68.}
+\item{Zwart, K.B., Burgers, S.L.G.E., Bloem, J., Bouwman, L.A., Brussaard, L., Lebbink, G.,
+Didden, W.A.M., Marinissen, J.C.Y., Vreeken-Buijs, M.J., de Ruiter, P.C., 1994.
+Population dynamics in the belowground food webs in two different agricultural systems.
+Agric. Ecosyst. Environ. 51, 187–198.
+https://doi.org/https://doi.org/10.1016/0167-8809(94)90043-4}
 }
-}
-\seealso{
-LovinkhoeveExpFarmIF
 }
 \keyword{datasets}
