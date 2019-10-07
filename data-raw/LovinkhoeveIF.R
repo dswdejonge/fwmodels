@@ -116,9 +116,65 @@ names(AE) <- compartments
 names(GE) <- compartments
 
 # Preference in feeding matrix
+W.nem_nem <- 1000
+W.protozoa_nem <- 10
+W.bac_nem <- 1
+W.arthro_mite <- 2
+W.nem_mite <- 1
+W.none <- 1
 
+PM <- matrix(
+  0,
+  nrow = length(compartments),
+  ncol = length(compartments),
+  byrow = T
+)
+rownames(PM) <- compartments
+colnames(PM) <- compartments
+if(T){
+  PM["Detritus", "Fungi"]                 <- W.none
+  PM["Detritus", "Bacteria"]              <- W.none
+  PM["Roots", "Phytophagous_nematodes"]   <- W.none
+  PM["Fungi", "Collembola"]               <- W.none
+  PM["Fungi", "Cryptostigmatic_mites"]    <- W.none
+  PM["Fungi", "Noncryptostigmatic_mites"] <- W.none
+  PM["Fungi", "Fungivorous_nematodes"]    <- W.protozoa_nem
+  PM["Fungi", "Enchytraeids"]             <- W.protozoa_nem
+  PM["Detritus", "Enchytraeids"]          <- W.none
+  PM["Bacteria", "Enchytraeids"]          <- W.protozoa_nem
+  PM["Bacteria", "Bacteriophagous_nematodes"] <- W.bac_nem
+  PM["Bacteria", "Flagellates"]           <- W.none
+  PM["Bacteria", "Bacteriophagous_mites"] <- W.none
+  PM["Bacteria", "Amoebae"]               <- W.none
+  PM["Bacteriophagous_nematodes", "Predatory_nematodes"] <- W.nem_nem
+  PM["Bacteria", "Predatory_nematodes"]                  <- W.bac_nem
+  PM["Flagellates", "Predatory_nematodes"]               <- W.protozoa_nem
+  PM["Flagellates", "Amoebae"]                           <- W.none
+  PM["Amoebae", "Predatory_nematodes"]                   <- W.protozoa_nem
+  PM["Phytophagous_nematodes", "Predatory_mites"]        <- W.nem_mite
+  PM["Phytophagous_nematodes", "Predatory_collembola"]   <- W.none
+  PM["Phytophagous_nematodes", "Nematophagous_mites"]    <- W.nem_mite
+  PM["Phytophagous_nematodes", "Predatory_nematodes"]    <- W.nem_nem
+  PM["Collembola", "Predatory_mites"]                    <- W.arthro_mite
+  PM["Cryptostigmatic_mites", "Predatory_mites"]         <- W.arthro_mite
+  PM["Noncryptostigmatic_mites", "Predatory_mites"]      <- W.arthro_mite
+  PM["Fungivorous_nematodes", "Predatory_mites"]         <- W.nem_mite
+  PM["Fungivorous_nematodes", "Predatory_collembola"]    <- W.none
+  PM["Fungivorous_nematodes", "Nematophagous_mites"]     <- W.nem_mite
+  PM["Fungivorous_nematodes", "Predatory_nematodes"]     <- W.nem_nem
+  PM["Bacteriophagous_mites", "Predatory_mites"]         <- W.arthro_mite
+  PM["Bacteriophagous_nematodes", "Predatory_mites"]     <- W.nem_mite
+  PM["Bacteriophagous_nematodes", "Predatory_collembola"] <- W.none
+  PM["Bacteriophagous_nematodes", "Nematophagous_mites"] <- W.nem_mite
+  PM["Predatory_nematodes", "Predatory_mites"]           <- W.nem_mite
+  PM["Predatory_nematodes", "Predatory_collembola"]      <- W.none
+  PM["Predatory_nematodes", "Nematophagous_mites"]       <- W.nem_mite
+  PM["Nematophagous_mites", "Predatory_mites"]           <- W.arthro_mite
+  PM["Predatory_collembola", "Predatory_mites"]          <- W.arthro_mite
+}
 
 # Flow matrix kg C ha-1 yr-1
+FM <- topDownBalancing(PM, MR, BM, AE, GE)
 
 # Create model list
 LovinkhoeveIF <- list(
