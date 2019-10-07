@@ -229,7 +229,7 @@ FM2 <- topDownBalancing(PM, MR, BM, AE, GE)
 
 # Create model list
 ## Values from figure
-LovinkhoeveExpFarmCP <- list(
+LovinkhoeveCP <- list(
   type = "EF",
   FM = FM,
   BM = BM,
@@ -237,10 +237,10 @@ LovinkhoeveExpFarmCP <- list(
   GE = GE,
   MR = MR
 )
-usethis::use_data(LovinkhoeveExpFarmCP, overwrite = TRUE)
+usethis::use_data(LovinkhoeveCP, overwrite = TRUE)
 
 ## Values calculated through top-down balancing.
-LovinkhoeveExpFarmCP2 <- list(
+LovinkhoeveCP2 <- list(
   type = "EF",
   FM = FM2,
   BM = BM,
@@ -248,4 +248,4 @@ LovinkhoeveExpFarmCP2 <- list(
   GE = GE,
   MR = MR
 )
-usethis::use_data(LovinkhoeveExpFarmCP2, overwrite = TRUE)
+usethis::use_data(LovinkhoeveCP2, overwrite = TRUE)

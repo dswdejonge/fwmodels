@@ -121,7 +121,7 @@ names(GE) <- compartments
 # Flow matrix kg C ha-1 yr-1
 
 # Create model list
-LovinkhoeveExpFarmIF <- list(
+LovinkhoeveIF <- list(
   type = "EF",
   FM = FM,
   BM = BM,
@@ -130,4 +130,4 @@ LovinkhoeveExpFarmIF <- list(
   MR = MR
 )
 
-usethis::use_data(LovinkhoeveExpFarmIF, overwrite = TRUE)
+usethis::use_data(LovinkhoeveIF, overwrite = TRUE)

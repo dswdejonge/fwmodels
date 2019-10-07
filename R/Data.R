@@ -1,9 +1,11 @@
-#' Lovinkhoeve Experimental Farm, conventional practice
+#' Lovinkhoeve Experimental Farm
 #'
-#' Energy flux carbon-based model of the Lovinkhoeve Experimental Farm (Marknesse, the Netherlands),
-#' conventional practice (soil).
-#' Includes flow matrix, biomasses, assimilation and growth efficiencies.
+#' Energy flux carbon-based models of the soil food web at the Lovinkhoeve Experimental Farm
+#' (Marknesse, the Netherlands) for both conventional practice and integrated farming.
+#' Includes flow matrix, biomasses, assimilation and growth efficiencies, and natural
+#' death rates.
 #'
+#' @name Lovinkhoeve
 #' @format A named list with 5 elements:
 #' \describe{
 #' \item{\code{type}}{"EF" because it is an energy flux model}
@@ -52,4 +54,13 @@
 #' Physiological values used in this food web are largely similar to physiological values
 #' used in other soil food webs. Feeding preference values are taken from Hunt et al. 1987.
 #' @seealso LovinkhoeveExpFarmIF
-"LovinkhoeveExpFarmCP"
+NULL
+
+#' @rdname Lovinkhoeve
+"LovinkhoeveCP"
+
+#' @rdname Lovinkhoeve
+"LovinkhoeveCP2"
+
+#' @rdname Lovinkhoeve
+"LovinkhoeveIF"
