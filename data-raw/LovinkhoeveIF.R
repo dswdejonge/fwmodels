@@ -1,6 +1,9 @@
 ## Lovinkhoeve Experimental Farm - integrated farming
 source("top_down_balancing.R")
 
+# Raw data from literature.
+# *************************
+
 # Compartment names
 compartments = c(
   "Detritus",
@@ -174,8 +177,16 @@ if(T){
   PM["Predatory_collembola", "Predatory_mites"]          <- W.arthro_mite
 }
 
+
+# Calculate feeding rates with top-down balancing
+# ***********************************************
 # Flow matrix kg C ha-1 yr-1
 FM <- topDownBalancing(PM, MR, BM, AE, GE)
+
+
+
+# Calculate feedback to detritus
+# ******************************
 
 # Excretion and mortality back into detritus are modeled implicitely,
 # but useful to include in the Flow matrix as flows from compartments
@@ -183,7 +194,11 @@ FM <- topDownBalancing(PM, MR, BM, AE, GE)
 # Feedback to detritus is excretion (1-AE)*consumption plus mortality MR * BM.
 FM[,"Detritus"] <- (1-AE)*colSums(FM) + MR*BM
 
-# Create model list
+
+
+
+# Bundle model data in named lists
+# *******************************
 LovinkhoeveIF <- list(
   type = "EF",
   FM = FM,
@@ -192,5 +207,15 @@ LovinkhoeveIF <- list(
   GE = GE,
   MR = MR
 )
+# Exclude detritus for simpler model
+LovinkhoeveIF_noDet <- list(
+  type = "EF",
+  FM = FM[-1,-1],
+  BM = BM[-1],
+  AE = AE[-1],
+  GE = GE[-1],
+  MR = MR[-1]
+)
 
 usethis::use_data(LovinkhoeveIF, overwrite = TRUE)
+usethis::use_data(LovinkhoeveIF_noDet, overwrite = TRUE)

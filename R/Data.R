@@ -39,11 +39,12 @@
 #' @details The soil food web at the Lovinkhoeve Experimental Farm was constructed for
 #' farming according to conventional practice (CP) and for integrated farming practice (IF),
 #' the latter meaning reduced input of inorganic fertilizer, pesticides, and soil tillage.
-#' The flow values for \code{LovinkhoeveCP} are taken from the figure in de Ruiter et al. (1995),
-#' whereas the flow values for \code{LovinkhoeveCP2} are calculated from the given data by
+#' The flow values for \code{LovinkhoeveCP2} are taken from the figure in de Ruiter et al. (1995),
+#' whereas the flow values for \code{LovinkhoeveCP} are calculated from the given data by
 #' top-down balancing. The flow matrices are very similar, but not exactly equal, probably
 #' due to rounding errors. The flow values for \code{LovinkhoeveIF} are calculated with
-#' top-down balancing.
+#' top-down balancing. The model \code{LovinkhoeveCP_noDet} is simply the \code{LovinkhoeveCP}
+#' excluding the detritus compartments.
 #' \cr
 #' \cr
 #' Annual feeding rates are calculated as
@@ -77,7 +78,13 @@ NULL
 "LovinkhoeveCP"
 
 #' @rdname Lovinkhoeve
+"LovinkhoeveCP_noDet"
+
+#' @rdname Lovinkhoeve
 "LovinkhoeveCP2"
 
 #' @rdname Lovinkhoeve
 "LovinkhoeveIF"
+
+#' @rdname Lovinkhoeve
+"LovinkhoeveIF_noDet"

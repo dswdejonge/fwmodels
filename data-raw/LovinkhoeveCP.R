@@ -253,7 +253,7 @@ FM2[,"Detritus"] <- (1-AE)*colSums(FM2) + MR*BM
 
 
 
-# Bundle model data in named list
+# Bundle model data in named lists
 # *******************************
 
 ## Values calculated through top-down balancing.
@@ -288,3 +288,4 @@ LovinkhoeveCP_noDet <- list(
 
 usethis::use_data(LovinkhoeveCP, overwrite = TRUE)
 usethis::use_data(LovinkhoeveCP2, overwrite = TRUE)
+usethis::use_data(LovinkhoeveCP_noDet, overwrite = TRUE)
