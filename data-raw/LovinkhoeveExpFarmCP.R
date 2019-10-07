@@ -167,19 +167,6 @@ names(GE) <- compartments
 rownames(FM) <- compartments
 colnames(FM) <- compartments
 
-# Create model list
-LovinkhoeveExpFarmCP <- list(
-  type = "EF",
-  FM = FM,
-  BM = BM,
-  AE = AE,
-  GE = GE,
-  MR = MR
-)
-
-usethis::use_data(LovinkhoeveExpFarmCP, overwrite = TRUE)
-
-
 # Feeding preference matrix
 W.nem_nem <- 1000
 W.protozoa_nem <- 10
@@ -210,32 +197,55 @@ if(T){
   PM["Bacteria", "Bacteriophagous_nematodes"] <- W.bac_nem
   PM["Bacteria", "Flagellates"]           <- W.none
   PM["Bacteria", "Bacteriophagous_mites"] <- W.none
-  PM["Bacteria", "Amoebae"]               <- W.none #?
+  PM["Bacteria", "Amoebae"]               <- W.none
   PM["Bacteriophagous_nematodes", "Predatory_nematodes"] <- W.nem_nem
   PM["Bacteria", "Predatory_nematodes"]                  <- W.bac_nem
   PM["Flagellates", "Predatory_nematodes"]               <- W.protozoa_nem
-  PM["Flagellates", "Amoebae"]                           <- W.none #?
+  PM["Flagellates", "Amoebae"]                           <- W.none
   PM["Amoebae", "Predatory_nematodes"]                   <- W.protozoa_nem
   PM["Phytophagous_nematodes", "Predatory_mites"]        <- W.nem_mite
-  PM["Phytophagous_nematodes", "Predatory_collembola"]   <- W.none #?
+  PM["Phytophagous_nematodes", "Predatory_collembola"]   <- W.none
   PM["Phytophagous_nematodes", "Nematophagous_mites"]    <- W.nem_mite
   PM["Phytophagous_nematodes", "Predatory_nematodes"]    <- W.nem_nem
   PM["Collembola", "Predatory_mites"]                    <- W.arthro_mite
   PM["Cryptostigmatic_mites", "Predatory_mites"]         <- W.arthro_mite
   PM["Noncryptostigmatic_mites", "Predatory_mites"]      <- W.arthro_mite
   PM["Fungivorous_nematodes", "Predatory_mites"]         <- W.nem_mite
-  PM["Fungivorous_nematodes", "Predatory_collembola"]    <- W.none #?
+  PM["Fungivorous_nematodes", "Predatory_collembola"]    <- W.none
   PM["Fungivorous_nematodes", "Nematophagous_mites"]     <- W.nem_mite
   PM["Fungivorous_nematodes", "Predatory_nematodes"]     <- W.nem_nem
   PM["Bacteriophagous_mites", "Predatory_mites"]         <- W.arthro_mite
   PM["Bacteriophagous_nematodes", "Predatory_mites"]     <- W.nem_mite
-  PM["Bacteriophagous_nematodes", "Predatory_collembola"] <- W.none #?
+  PM["Bacteriophagous_nematodes", "Predatory_collembola"] <- W.none
   PM["Bacteriophagous_nematodes", "Nematophagous_mites"] <- W.nem_mite
   PM["Predatory_nematodes", "Predatory_mites"]           <- W.nem_mite
-  PM["Predatory_nematodes", "Predatory_collembola"]      <- W.none #?
+  PM["Predatory_nematodes", "Predatory_collembola"]      <- W.none
   PM["Predatory_nematodes", "Nematophagous_mites"]       <- W.nem_mite
   PM["Nematophagous_mites", "Predatory_mites"]           <- W.arthro_mite
   PM["Predatory_collembola", "Predatory_mites"]          <- W.arthro_mite
 }
 
 FM2 <- topDownBalancing(PM, MR, BM, AE, GE)
+
+# Create model list
+## Values from figure
+LovinkhoeveExpFarmCP <- list(
+  type = "EF",
+  FM = FM,
+  BM = BM,
+  AE = AE,
+  GE = GE,
+  MR = MR
+)
+usethis::use_data(LovinkhoeveExpFarmCP, overwrite = TRUE)
+
+## Values calculated through top-down balancing.
+LovinkhoeveExpFarmCP2 <- list(
+  type = "EF",
+  FM = FM2,
+  BM = BM,
+  AE = AE,
+  GE = GE,
+  MR = MR
+)
+usethis::use_data(LovinkhoeveExpFarmCP2, overwrite = TRUE)
