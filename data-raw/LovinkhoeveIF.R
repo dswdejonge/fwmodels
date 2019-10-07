@@ -1,4 +1,5 @@
 ## Lovinkhoeve Experimental Farm - integrated farming
+source("top_down_balancing.R")
 
 # Compartment names
 compartments = c(
@@ -175,6 +176,12 @@ if(T){
 
 # Flow matrix kg C ha-1 yr-1
 FM <- topDownBalancing(PM, MR, BM, AE, GE)
+
+# Excretion and mortality back into detritus are modeled implicitely,
+# but useful to include in the Flow matrix as flows from compartments
+# back into detritus.
+# Feedback to detritus is excretion (1-AE)*consumption plus mortality MR * BM.
+FM[,"Detritus"] <- (1-AE)*colSums(FM) + MR*BM
 
 # Create model list
 LovinkhoeveIF <- list(

@@ -1,4 +1,5 @@
 ## Lovinkhoeve Experimental Farm - conventional pratice
+source("top_down_balancing.R")
 
 # Compartment names
 compartments = c(
@@ -244,8 +245,6 @@ LovinkhoeveCP <- list(
   GE = GE,
   MR = MR
 )
-usethis::use_data(LovinkhoeveCP, overwrite = TRUE)
-
 ## Values calculated through top-down balancing.
 LovinkhoeveCP2 <- list(
   type = "EF",
@@ -255,4 +254,6 @@ LovinkhoeveCP2 <- list(
   GE = GE,
   MR = MR
 )
+
+usethis::use_data(LovinkhoeveCP, overwrite = TRUE)
 usethis::use_data(LovinkhoeveCP2, overwrite = TRUE)
