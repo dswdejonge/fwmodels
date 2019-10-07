@@ -1,6 +1,9 @@
 ## Lovinkhoeve Experimental Farm - conventional pratice
 source("top_down_balancing.R")
 
+# Raw data from literature.
+# *************************
+
 # Compartment names
 compartments = c(
   "Detritus",
@@ -111,62 +114,11 @@ GE = c(
   0.35
 )
 
-# kg C ha-1 yr-1
-FM <- matrix(
-  0,
-  nrow = length(compartments),
-  ncol = length(compartments),
-  byrow = T
-)
-if(T){
-  FM[1,3] <- 40.8
-  FM[1,4] <- 1606
-  FM[2,5] <- 7.44
-  FM[3,6] <- 6.65
-  FM[3,7] <- 0.08
-  FM[3,8] <- 0.34
-  FM[3,9] <- 2.51
-  FM[3,10] <- 0.09
-  FM[1,10] <- 11.1
-  FM[4,10] <- 10.1
-  FM[4,11] <- 6.89
-  FM[4,12] <- 9.46
-  FM[4,13] <- 0.01
-  FM[4,14] <- 182
-  FM[11,15] <- 0.42
-  FM[4,15] <- 0.33
-  FM[12,15] <- 0.008
-  FM[12,14] <- 0.42
-  FM[14,15] <- 0.17
-  FM[5,18] <- 0.06
-  FM[5,17] <- 0.13
-  FM[5,16] <- 0.01
-  FM[5,15] <- 0.28
-  FM[6,18] <- 0.31
-  FM[7,18] <- 0.005
-  FM[8,18] <- 0.015
-  FM[9,18] <- 0.03
-  FM[9,17] <- 0.05
-  FM[9,16] <- 0.004
-  FM[9,15] <- 0.11
-  FM[13,18] <- 0.0003
-  FM[11,18] <- 0.10
-  FM[11,17] <- 0.20
-  FM[11,16] <- 0.014
-  FM[15,18] <- 0.02
-  FM[15,17] <- 0.04
-  FM[15,16] <- 0.003
-  FM[16,18] <- 0.002
-  FM[17,18] <- 0.02
-}
-
 # Name vectors
 names(BM) <- compartments
 names(MR) <- compartments
 names(AE) <- compartments
 names(GE) <- compartments
-rownames(FM) <- compartments
-colnames(FM) <- compartments
 
 # Feeding preference matrix
 W.nem_nem <- 1000
@@ -225,8 +177,72 @@ if(T){
   PM["Nematophagous_mites", "Predatory_mites"]           <- W.arthro_mite
   PM["Predatory_collembola", "Predatory_mites"]          <- W.arthro_mite
 }
-FM2 <- topDownBalancing(PM, MR, BM, AE, GE)
 
+
+
+# Calculate feeding rates with top-down balancing
+# ***********************************************
+FM <- topDownBalancing(PM, MR, BM, AE, GE)
+
+
+
+# Copy feeding rates from the figure of De Ruiter et al. (1995)
+# *************************************************************
+# kg C ha-1 yr-1
+FM2 <- matrix(
+  0,
+  nrow = length(compartments),
+  ncol = length(compartments),
+  byrow = T
+)
+if(T){
+  FM2[1,3] <- 40.8
+  FM2[1,4] <- 1606
+  FM2[2,5] <- 7.44
+  FM2[3,6] <- 6.65
+  FM2[3,7] <- 0.08
+  FM2[3,8] <- 0.34
+  FM2[3,9] <- 2.51
+  FM2[3,10] <- 0.09
+  FM2[1,10] <- 11.1
+  FM2[4,10] <- 10.1
+  FM2[4,11] <- 6.89
+  FM2[4,12] <- 9.46
+  FM2[4,13] <- 0.01
+  FM2[4,14] <- 182
+  FM2[11,15] <- 0.42
+  FM2[4,15] <- 0.33
+  FM2[12,15] <- 0.008
+  FM2[12,14] <- 0.42
+  FM2[14,15] <- 0.17
+  FM2[5,18] <- 0.06
+  FM2[5,17] <- 0.13
+  FM2[5,16] <- 0.01
+  FM2[5,15] <- 0.28
+  FM2[6,18] <- 0.31
+  FM2[7,18] <- 0.005
+  FM2[8,18] <- 0.015
+  FM2[9,18] <- 0.03
+  FM2[9,17] <- 0.05
+  FM2[9,16] <- 0.004
+  FM2[9,15] <- 0.11
+  FM2[13,18] <- 0.0003
+  FM2[11,18] <- 0.10
+  FM2[11,17] <- 0.20
+  FM2[11,16] <- 0.014
+  FM2[15,18] <- 0.02
+  FM2[15,17] <- 0.04
+  FM2[15,16] <- 0.003
+  FM2[16,18] <- 0.002
+  FM2[17,18] <- 0.02
+}
+rownames(FM2) <- compartments
+colnames(FM2) <- compartments
+
+
+
+# Calculate feedback to detritus
+# ******************************
 
 # Excretion and mortality back into detritus are modeled implicitely,
 # but useful to include in the Flow matrix as flows from compartments
@@ -235,8 +251,12 @@ FM2 <- topDownBalancing(PM, MR, BM, AE, GE)
 FM[,"Detritus"] <- (1-AE)*colSums(FM) + MR*BM
 FM2[,"Detritus"] <- (1-AE)*colSums(FM2) + MR*BM
 
-# Create model list
-## Values from figure
+
+
+# Bundle model data in named list
+# *******************************
+
+## Values calculated through top-down balancing.
 LovinkhoeveCP <- list(
   type = "EF",
   FM = FM,
@@ -245,7 +265,8 @@ LovinkhoeveCP <- list(
   GE = GE,
   MR = MR
 )
-## Values calculated through top-down balancing.
+
+## Values from figure
 LovinkhoeveCP2 <- list(
   type = "EF",
   FM = FM2,
@@ -253,6 +274,16 @@ LovinkhoeveCP2 <- list(
   AE = AE,
   GE = GE,
   MR = MR
+)
+
+## Model without detritus
+LovinkhoeveCP_noDet <- list(
+  type = "EF",
+  FM = FM[-1,-1],
+  BM = BM[-1],
+  AE = AE[-1],
+  GE = GE[-1],
+  MR = MR[-1]
 )
 
 usethis::use_data(LovinkhoeveCP, overwrite = TRUE)
