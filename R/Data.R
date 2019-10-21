@@ -88,3 +88,49 @@ NULL
 
 #' @rdname Lovinkhoeve
 "LovinkhoeveIF_noDet"
+
+
+#' Antarctic Tundra
+#'
+#' Material-flux networks of a dry moss turf community (Antarctic dry tundra) and a wet moss
+#' carpet commnity (Antarctic wet tundra).
+#' Includes flow matrix, biomasses, assimilation and growth efficiencies, and natural
+#' death rates.
+#'
+#' @name Antarctic_tundra
+#' @format A named list with 5 elements:
+#' \describe{
+#' \item{\code{type}}{"EF" because it is an energy flux model}
+#' \item{\code{FM}}{Square flow matrix with named sources (rows) and sinks (columns).
+#' Unit is kg C ha-1 yr-1.}
+#' \item{\code{BM}}{Named numeric vector with biomasses of all compartments.
+#' Unit is kg C ha-1.}
+#' \item{\code{AE}}{Named numeric vector with assimilation efficiencies of all compartments.
+#' Fractions. If AE is not relevent (i.e. detritus and roots) the value is set to NA.}
+#' \item{\code{GE}}{Named numeric vector with growth efficiencies of all compartments.
+#' Fractions. If GE is not relevent (i.e. detritus and roots) the value is set to NA.}
+#' \item{\code{MR}}{Named numeric vector with mortality rates of all compartments.
+#' Unit is yr-1.}
+#' }
+#' @references \itemize{
+#' \item{Neutel, A.M., Thorne, M.A.S., 2014. Interaction strengths in balanced carbon cycles
+#' and the absence of a relation between ecosystem complexity and stability.
+#' Ecol. Lett. 17, 651–661. https://doi.org/10.1111/ele.12266
+#' }
+#' @details Two food web models are available for the Antarctic tundra: a dry moss turf
+#' community (\code{Antarctic_tundra_dry}) and a wet moss carpet community
+#' (\code{Antarctic_tundra_wet}).
+#' The data for these models was collected from Signy Island and the South Orkney Islands.
+#' \cr
+#' \cr
+#' The compartments (n = 23 for dry, and n = 18 for wet tundra) are trophic groups, but tend
+#' towards single species dominance. Therefore, a list with corresponding representative taxa
+#' is also included.
+NULL
+
+#' @rdname Antarctic_tundra
+"Antarctic_tundry_dry"
+
+#' @rdname Antarctic_tundra
+"Antarctic_tundry_wet"
+

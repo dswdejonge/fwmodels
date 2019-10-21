@@ -1,4 +1,4 @@
-## Lovinkhoeve Experimental Farm - integrated farming
+## Antarctic Tundra - dry
 source("top_down_balancing.R")
 
 # Raw data from literature.
@@ -6,28 +6,58 @@ source("top_down_balancing.R")
 
 # Compartment names
 compartments <- c(
-  "Detritus",
-  "Roots",
-  "Fungi",
-  "Bacteria",
-  "Phytophagous_nematodes",
-  "Collembola",
-  "Cryptostigmatic_mites",
-  "Noncryptostigmatic_mites",
+  "Predatory_mites",
+  "Carnivorous_nematodes",
+  "Carnivorous_tardigrades",
+  "Omnivorous_nematodes",
   "Fungivorous_nematodes",
-  "Enchytraeids",
-  "Bacteriophagous_nematodes",
-  "Flagellates",
-  "Bacteriophagous_mites",
-  "Amoebae",
-  "Predatory_nematodes",
-  "Nematophagous_mites",
-  "Predatory_collembola",
-  "Predatory_mites"
+  "Bacterivorous_nematodes",
+  "Omnivorous_collembola",
+  "Omnivorous_rotifers",
+  "Omnivorous_tardigrades",
+  "Herbivorous_Microbivorous_mites1",
+  "Herbivorous_Microbivorous_mites2",
+  "Herbivorous_Microbivorous_protozoa",
+  "Detritivorous_Microbivorous_protozoa",
+  "Herbivorous_mites",
+  "Herbivorous_tardigrades",
+  "Detritivorous_tardigrades",
+  "Detritivorous_rotifers1",
+  "Detritivorous_rotifers2",
+  "Bacteria",
+  "Fungi",
+  "Mosses_Lichens_Liverworts",
+  "Algae",
+  "Detritus"
+)
+representative_taxa = c(
+  "Gamasellus_racovitzai",
+  "Coomansus_gerlachei",
+  "Macrobiotus_furgicer",
+  "Eudorylaimus_sp.",
+  "Aphelenchoides_haguei",
+  "Plectus_antarcticus",
+  "Cryptopygus_antarcticus",
+  "Monogononta",
+  "Echiiniscus_capillatus",
+  "Eupodes_minutus",
+  "Ereynetes_macquariensis",
+  "Sarcodina",
+  "Mastigophora",
+  "Nanorchestes_antarcticus",
+  "Hypsibius_dujardini",
+  "Hypsibius_alpinus",
+  "Adineta",
+  "other_Bdelloidea",
+  "Bacteria",
+  "Fungi",
+  "Polytrichum_alpestre_and_Chorisondontum_aciphyllum_(mosses)_Cephaloziella_varians_and_Barbilophozoia_hatchery_(liverworts)",
+  "Algae",
+  "Detritus"
 )
 
 # Biomasses kg C ha-1
-BM <- c(
+BM = c(
   2500, #????
   300, #?????
   3.27,
@@ -49,7 +79,7 @@ BM <- c(
 )
 
 # Mortalities year-1
-MR <- c(
+MR = c(
   NA,
   1.00,
   1.20,
@@ -71,7 +101,7 @@ MR <- c(
 )
 
 # Assimilation efficiency
-AE <- c(
+AE = c(
   NA,
   NA,
   1.00,
@@ -93,7 +123,7 @@ AE <- c(
 )
 
 # Growth efficiencies
-GE <- c(
+GE = c(
   NA,
   NA,
   0.30,
