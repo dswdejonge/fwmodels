@@ -159,7 +159,9 @@ NULL
 #' \cr
 #' \cr
 #' Consumption of resource i by consumer j (Fij) was calculated using diet proportions:
-#' $Fij = pijQj$, where pij is the diet proportion of i in the diet of j.
+#' $Fij = pijQj$, where pij is the diet proportion of i in the diet of j. The given diet
+#' proportions in Neutel & Thorne (2014) did not always exactly add up to one.
+#' In those cases rounding error were assumed and fixed before calculating the consumption fluxes.
 #' \cr
 #' \cr
 #' Feedback back to detritus was the sum of egestion and non-predatory mortality of all
@@ -174,6 +176,4 @@ NULL
 #' @rdname Antarctic_tundra
 "Antarctic_tundry_dry"
 
-#' @rdname Antarctic_tundra
-"Antarctic_tundry_wet"
 
