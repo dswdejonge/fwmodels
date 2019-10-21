@@ -93,7 +93,7 @@ NULL
 #' Antarctic Tundra
 #'
 #' Material-flux networks of a dry moss turf community (Antarctic dry tundra) and a wet moss
-#' carpet commnity (Antarctic wet tundra).
+#' carpet commnity (Antarctic wet tundra) at Signy Island (one of the South Orkney Islands).
 #' Includes flow matrix, biomasses, assimilation and growth efficiencies, and natural
 #' death rates.
 #'
@@ -113,19 +113,31 @@ NULL
 #' Unit is yr-1.}
 #' }
 #' @references \itemize{
+#' \item{Davis 1981}
 #' \item{Neutel, A.M., Thorne, M.A.S., 2014. Interaction strengths in balanced carbon cycles
 #' and the absence of a relation between ecosystem complexity and stability.
 #' Ecol. Lett. 17, 651–661. https://doi.org/10.1111/ele.12266
 #' }
+#' \item{Heal & Maclean 1975}
+#' }
 #' @details Two food web models are available for the Antarctic tundra: a dry moss turf
 #' community (\code{Antarctic_tundra_dry}) and a wet moss carpet community
 #' (\code{Antarctic_tundra_wet}).
-#' The data for these models was collected from Signy Island and the South Orkney Islands.
+#' The data for these models was collected from Signy Island (one of the South Orkney Islands).
+#' The food web model is constructed as in Neutel & Thorne (2014), with data taken from their
+#' supplementary material or from the original source in literature.
 #' \cr
 #' \cr
 #' The compartments (n = 23 for dry, and n = 18 for wet tundra) are trophic groups, but tend
 #' towards single species dominance. Therefore, a list with corresponding representative taxa
 #' is also included.
+#' \cr
+#' \cr
+#' All fluxes are inferred from measured respiration rates, collected over multiple years
+#' (Davis 1981), conversion efficiencies (Heal & Maclean 1975), and feeding preferences
+#' (Davis 1981). Some feeding preferences were not provided by Davis (1981), in which case
+#' specific assumptions were made and tested for ecosystem stability (details in supplementary
+#' material of Neutel & Thorne 2014).
 NULL
 
 #' @rdname Antarctic_tundra

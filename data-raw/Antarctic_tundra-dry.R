@@ -56,48 +56,31 @@ representative_taxa = c(
   "Detritus"
 )
 
-# Biomasses kg C ha-1
+# Biomasses mg Dry Mass m2
 BM = c(
-  2500, #????
-  300, #?????
-  3.27,
-  245,
-  0.35,
-  0.38,
-  0.003,
-  0.04,
-  0.13,
-  0.21,
-  0.36,
-  0.63,
-  0.0003,
-  18.9,
-  0.06,
-  0.006,
-  0.008,
-  0.08
-)
-
-# Mortalities year-1
-MR = c(
-  NA,
-  1.00,
-  1.20,
-  1.20,
-  1.08,
-  1.84,
-  1.20,
-  1.84,
-  1.92,
-  5.00,
-  2.68,
-  6.00,
-  1.84,
-  6.00,
-  3.00,
-  1.84,
-  1.84,
-  1.84
+  5.9,
+  0.2,
+  9.2,
+  13.1,
+  2,
+  15,
+  224.9,
+  5.3,
+  12.6,
+  1.7,
+  1,
+  1240,
+  1.5,
+  .5,
+  12.6,
+  12.6,
+  6.9,
+  13.1,
+  50.8,
+  5.6,
+  604000,
+  8400,
+  33500000
 )
 
 # Assimilation efficiency
@@ -149,62 +132,67 @@ names(MR) <- compartments
 names(AE) <- compartments
 names(GE) <- compartments
 
-# Preference in feeding matrix
-W.nem_nem <- 1000
-W.protozoa_nem <- 10
-W.bac_nem <- 1
-W.arthro_mite <- 2
-W.nem_mite <- 1
-W.none <- 1
 
+# Preference in feeding matrix
 PM <- matrix(
   0,
   nrow = length(compartments),
-  ncol = length(compartments),
-  byrow = T
+  ncol = length(compartments)
 )
 rownames(PM) <- compartments
 colnames(PM) <- compartments
 if(T){
-  PM["Detritus", "Fungi"]                 <- W.none
-  PM["Detritus", "Bacteria"]              <- W.none
-  PM["Roots", "Phytophagous_nematodes"]   <- W.none
-  PM["Fungi", "Collembola"]               <- W.none
-  PM["Fungi", "Cryptostigmatic_mites"]    <- W.none
-  PM["Fungi", "Noncryptostigmatic_mites"] <- W.none
-  PM["Fungi", "Fungivorous_nematodes"]    <- W.protozoa_nem
-  PM["Fungi", "Enchytraeids"]             <- W.protozoa_nem
-  PM["Detritus", "Enchytraeids"]          <- W.none
-  PM["Bacteria", "Enchytraeids"]          <- W.protozoa_nem
-  PM["Bacteria", "Bacteriophagous_nematodes"] <- W.bac_nem
-  PM["Bacteria", "Flagellates"]           <- W.none
-  PM["Bacteria", "Bacteriophagous_mites"] <- W.none
-  PM["Bacteria", "Amoebae"]               <- W.none
-  PM["Bacteriophagous_nematodes", "Predatory_nematodes"] <- W.nem_nem
-  PM["Bacteria", "Predatory_nematodes"]                  <- W.bac_nem
-  PM["Flagellates", "Predatory_nematodes"]               <- W.protozoa_nem
-  PM["Flagellates", "Amoebae"]                           <- W.none
-  PM["Amoebae", "Predatory_nematodes"]                   <- W.protozoa_nem
-  PM["Phytophagous_nematodes", "Predatory_mites"]        <- W.nem_mite
-  PM["Phytophagous_nematodes", "Predatory_collembola"]   <- W.none
-  PM["Phytophagous_nematodes", "Nematophagous_mites"]    <- W.nem_mite
-  PM["Phytophagous_nematodes", "Predatory_nematodes"]    <- W.nem_nem
-  PM["Collembola", "Predatory_mites"]                    <- W.arthro_mite
-  PM["Cryptostigmatic_mites", "Predatory_mites"]         <- W.arthro_mite
-  PM["Noncryptostigmatic_mites", "Predatory_mites"]      <- W.arthro_mite
-  PM["Fungivorous_nematodes", "Predatory_mites"]         <- W.nem_mite
-  PM["Fungivorous_nematodes", "Predatory_collembola"]    <- W.none
-  PM["Fungivorous_nematodes", "Nematophagous_mites"]     <- W.nem_mite
-  PM["Fungivorous_nematodes", "Predatory_nematodes"]     <- W.nem_nem
-  PM["Bacteriophagous_mites", "Predatory_mites"]         <- W.arthro_mite
-  PM["Bacteriophagous_nematodes", "Predatory_mites"]     <- W.nem_mite
-  PM["Bacteriophagous_nematodes", "Predatory_collembola"] <- W.none
-  PM["Bacteriophagous_nematodes", "Nematophagous_mites"] <- W.nem_mite
-  PM["Predatory_nematodes", "Predatory_mites"]           <- W.nem_mite
-  PM["Predatory_nematodes", "Predatory_collembola"]      <- W.none
-  PM["Predatory_nematodes", "Nematophagous_mites"]       <- W.nem_mite
-  PM["Nematophagous_mites", "Predatory_mites"]           <- W.arthro_mite
-  PM["Predatory_collembola", "Predatory_mites"]          <- W.arthro_mite
+  PM[4, 2]   <- 0.436
+  PM[5, 2]   <- 0.0693
+  PM[5, 3]   <- 0.0297
+  PM[5, 4]   <- 0.0139
+  PM[6, 2]   <- 0.495
+  PM[6, 3]   <- 0.218
+  PM[6, 4]   <- 0.102
+  PM[7, 1]   <- 0.94
+  PM[9, 3]   <- 0.188
+  PM[10, 1]  <- 0.04
+  PM[11, 1]  <- 0.02
+  PM[12, 4]  <- 0.084
+  PM[13, 4]  <- 0.0001
+  PM[15, 3]  <- 0.188
+  PM[16, 3]  <- 0.188
+  PM[17, 8]  <- 0.118
+  PM[18, 3]  <- 0.188
+  PM[18, 8]  <- 216
+  PM[19, 4]  <- 0.359
+  PM[19, 6]  <- 1
+  PM[19, 8]  <- 0.3
+  PM[19, 9]  <- 0.3
+  PM[19, 12] <- 0.95
+  PM[19, 13] <- 0.95
+  PM[20, 4]  <- 0.04
+  PM[20, 5]  <- 1
+  PM[20, 7]  <- 0.465
+  PM[20, 8]  <- 0.033
+  PM[20, 9]  <- 0.033
+  PM[20, 10] <- 0.1
+  PM[20, 11] <- 0.05
+  PM[21, 4]  <- 0.198
+  PM[21, 9]  <- 0.33
+  PM[22, 4]  <- 0.0026
+  PM[22, 7]  <- 0.12
+  PM[22, 8]  <- 0.333
+  PM[22, 9]  <- 0.005
+  PM[22, 10] <- 0.9
+  PM[22, 11] <- 0.95
+  PM[22, 12] <- 0.05
+  PM[22, 14] <- 1
+  PM[22, 15] <- 1
+  PM[23, 4]  <- 0.2
+  PM[23, 7]  <- 0.414
+  PM[23, 9]  <- 0.33
+  PM[23, 13] <- 0.05
+  PM[23, 16] <- 1
+  PM[23, 17] <- 1
+  PM[23, 18] <- 1
+  PM[23, 19] <- 1
+  PM[23, 20] <- 1
 }
 
 
