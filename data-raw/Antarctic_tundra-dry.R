@@ -1,5 +1,4 @@
 ## Antarctic Tundra - dry
-source("top_down_balancing.R")
 
 # Raw data from literature.
 # *************************
@@ -30,7 +29,7 @@ compartments <- c(
   "Algae",
   "Detritus"
 )
-representative_taxa = c(
+representative_taxa <- c(
   "Gamasellus_racovitzai",
   "Coomansus_gerlachei",
   "Macrobiotus_furgicer",
@@ -56,7 +55,7 @@ representative_taxa = c(
   "Detritus"
 )
 
-# Biomasses mg Dry Mass m2
+# Biomasses mg Dry Mass m-2
 BM = c(
   5.9,
   0.2,
@@ -71,7 +70,7 @@ BM = c(
   1,
   1240,
   1.5,
-  .5,
+  0.5,
   12.6,
   12.6,
   6.9,
@@ -84,56 +83,75 @@ BM = c(
 )
 
 # Assimilation efficiency
-AE = c(
+AE <- c(
+  0.8,
+  0.8,
+  0.8,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  1,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  0.3,
+  1,
+  1,
   NA,
   NA,
-  1.00,
-  1.00,
-  0.25,
-  0.50,
-  0.50,
-  0.50,
-  0.38,
-  0.25,
-  0.60,
-  0.95,
-  0.50,
-  0.95,
-  0.50,
-  0.90,
-  0.50,
-  0.60
+  NA
 )
 
-# Growth efficiencies
-GE = c(
+# Growth efficiency
+GE <- c(
+  0.3,
+  0.3,
+  0.3,
+  rep(0.4, 17),
   NA,
   NA,
-  0.30,
-  0.30,
-  0.37,
-  0.35,
-  0.35,
-  0.35,
-  0.37,
-  0.40,
-  0.37,
-  0.40,
-  0.35,
-  0.40,
-  0.37,
-  0.35,
-  0.35,
-  0.35
+  NA
 )
-# Name vectors
+
+# Total feeding rate consumers (mg DM m-2 yr-1)
+Qj <- c(
+  50.2,
+  0.7,
+  27.9,
+  232.2,
+  186.1,
+  775.6,
+  6622,
+  197,
+  409.8,
+  275,
+  158.3,
+  182222,
+  16000,
+  54.4,
+  409.8,
+  409.8,
+  256,
+  486,
+  537300,
+  59700,
+  0,
+  0,
+  0
+)
 names(BM) <- compartments
-names(MR) <- compartments
 names(AE) <- compartments
 names(GE) <- compartments
+names(Qj) <- compartments
 
-
-# Preference in feeding matrix
+# Proportion of resource in diet consumer.
 PM <- matrix(
   0,
   nrow = length(compartments),
@@ -143,8 +161,8 @@ rownames(PM) <- compartments
 colnames(PM) <- compartments
 if(T){
   PM[4, 2]   <- 0.436
-  PM[5, 2]   <- 0.0693
-  PM[5, 3]   <- 0.0297
+  PM[5, 2]   <- 0.069 #0.0693
+  PM[5, 3]   <- 0.030 #0.0297
   PM[5, 4]   <- 0.0139
   PM[6, 2]   <- 0.495
   PM[6, 3]   <- 0.218
@@ -159,7 +177,7 @@ if(T){
   PM[16, 3]  <- 0.188
   PM[17, 8]  <- 0.118
   PM[18, 3]  <- 0.188
-  PM[18, 8]  <- 216
+  PM[18, 8]  <- 0.216
   PM[19, 4]  <- 0.359
   PM[19, 6]  <- 1
   PM[19, 8]  <- 0.3
@@ -174,8 +192,8 @@ if(T){
   PM[20, 10] <- 0.1
   PM[20, 11] <- 0.05
   PM[21, 4]  <- 0.198
-  PM[21, 9]  <- 0.33
-  PM[22, 4]  <- 0.0026
+  PM[21, 9]  <- 0.331
+  PM[22, 4]  <- 0.003 #0.0026
   PM[22, 7]  <- 0.12
   PM[22, 8]  <- 0.333
   PM[22, 9]  <- 0.005
@@ -185,8 +203,8 @@ if(T){
   PM[22, 14] <- 1
   PM[22, 15] <- 1
   PM[23, 4]  <- 0.2
-  PM[23, 7]  <- 0.414
-  PM[23, 9]  <- 0.33
+  PM[23, 7]  <- 0.415 #0.414
+  PM[23, 9]  <- 0.331
   PM[23, 13] <- 0.05
   PM[23, 16] <- 1
   PM[23, 17] <- 1
@@ -196,28 +214,30 @@ if(T){
 }
 
 
-# Calculate feeding rates with top-down balancing
-# ***********************************************
-# Flow matrix kg C ha-1 yr-1
-FM <- topDownBalancing(PM, MR, BM, AE, GE)
-
+# Calculate feeding rates with diet proportions
+# *********************************************
+# Flow matrix mg DM m-2 yr-1
+FM <- t(t(PM) * Qj)
 
 
 # Calculate feedback to detritus
 # ******************************
 
-# Excretion and mortality back into detritus are modeled implicitely,
-# but useful to include in the Flow matrix as flows from compartments
-# back into detritus.
-# Feedback to detritus is excretion (1-AE)*consumption plus mortality MR * BM.
-FM[,"Detritus"] <- (1-AE)*colSums(FM) + MR*BM
+# Egestion and mortality back into detritus.
+# Egestion is (1-AE)*Fij
+egestion <- (1-AE)*colSums(FM, na.rm = T)
+# Mortality is AE*GE*Fij - Fji
+mortality <- AE*GE*colSums(FM, na.rm = T) - rowSums(FM, na.rm = T)
+FM[,"Detritus"] <- egestion + mortality
 
-
-
+# Calculate mortality rates
+# *************************
+# Mortality rate (yr-1) is mortality (mg DM m-2 yr-1) divided by biomass (mg DM m-2)
+MR <- mortality / BM
 
 # Bundle model data in named lists
 # *******************************
-LovinkhoeveIF <- list(
+Antarctic_tundry_dry <- list(
   type = "EF",
   FM = FM,
   BM = BM,
@@ -226,14 +246,14 @@ LovinkhoeveIF <- list(
   MR = MR
 )
 # Exclude detritus for simpler model
-LovinkhoeveIF_noDet <- list(
-  type = "EF",
-  FM = FM[-1,-1],
-  BM = BM[-1],
-  AE = AE[-1],
-  GE = GE[-1],
-  MR = MR[-1]
-)
+#LovinkhoeveIF_noDet <- list(
+#  type = "EF",
+#  FM = FM[-1,-1],
+#  BM = BM[-1],
+#  AE = AE[-1],
+#  GE = GE[-1],
+#  MR = MR[-1]
+#)
 
-usethis::use_data(LovinkhoeveIF, overwrite = TRUE)
-usethis::use_data(LovinkhoeveIF_noDet, overwrite = TRUE)
+usethis::use_data(Antarctic_tundry_dry, overwrite = TRUE)
+#usethis::use_data(LovinkhoeveIF_noDet, overwrite = TRUE)

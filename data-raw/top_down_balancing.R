@@ -1,6 +1,4 @@
 consumptionRate <- function(MR, BM, P, AE, GE) {
-  #if(is.na(AE)){AE <- 1}
-  #if(is.na(GE)){GE <- 1}
   F <- (MR * BM + P) / (AE * GE)
   return(F)
 }
