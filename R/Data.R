@@ -92,10 +92,10 @@ NULL
 
 #' Antarctic Tundra
 #'
-#' Material-flux networks of a dry moss turf community (Antarctic dry tundra) and a wet moss
-#' carpet commnity (Antarctic wet tundra) at Signy Island (one of the South Orkney Islands).
-#' Includes flow matrix, biomasses, assimilation and growth efficiencies, and natural
-#' death rates.
+#' Material-flux networks (dry mass DM) of a dry moss turf community (Antarctic dry tundra) and a wet moss
+#' carpet commnity (Antarctic wet tundra) at Signy Island, South Orkney Islands.
+#' Includes flow matrix, biomasses, assimilation and growth efficiencies, natural
+#' death rates, and representative taxa.
 #'
 #' @name Antarctic_tundra
 #' @format A named list with 7 elements:
@@ -111,7 +111,7 @@ NULL
 #' Fractions. If GE is not relevent the value is set to NA.}
 #' \item{\code{MR}}{Named numeric vector with mortality rates of all compartments.
 #' Unit is yr-1.}
-#' \item{code{representative_taxa}}{Taxonomic groups that are representative for the corresponding
+#' \item{\code{representative_taxa}}{Taxonomic groups that are representative for the corresponding
 #' trophic groups.}
 #' }
 #' @references \itemize{

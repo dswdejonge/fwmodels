@@ -19,7 +19,7 @@ Fractions. If AE is not relevent the value is set to NA.}
 Fractions. If GE is not relevent the value is set to NA.}
 \item{\code{MR}}{Named numeric vector with mortality rates of all compartments.
 Unit is yr-1.}
-\item{code{representative_taxa}}{Taxonomic groups that are representative for the corresponding
+\item{\code{representative_taxa}}{Taxonomic groups that are representative for the corresponding
 trophic groups.}
 }}
 \usage{
@@ -28,10 +28,10 @@ Antarctic_tundra_dry
 Antarctic_tundra_wet
 }
 \description{
-Material-flux networks of a dry moss turf community (Antarctic dry tundra) and a wet moss
-carpet commnity (Antarctic wet tundra) at Signy Island (one of the South Orkney Islands).
-Includes flow matrix, biomasses, assimilation and growth efficiencies, and natural
-death rates.
+Material-flux networks (dry mass DM) of a dry moss turf community (Antarctic dry tundra) and a wet moss
+carpet commnity (Antarctic wet tundra) at Signy Island, South Orkney Islands.
+Includes flow matrix, biomasses, assimilation and growth efficiencies, natural
+death rates, and representative taxa.
 }
 \details{
 Two food web models are available for the Antarctic tundra: a dry moss turf
