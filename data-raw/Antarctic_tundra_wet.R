@@ -1,11 +1,10 @@
-## Antarctic Tundra - dry
+## Antarctic Tundra - wet
 
 # Raw data from literature.
 # *************************
 
 # Compartment names
 compartments <- c(
-  "Predatory_mites",
   "Carnivorous_nematodes",
   "Carnivorous_tardigrades",
   "Omnivorous_nematodes",
@@ -14,11 +13,7 @@ compartments <- c(
   "Omnivorous_collembola",
   "Omnivorous_rotifers",
   "Omnivorous_tardigrades",
-  "Herbivorous_Microbivorous_mites1",
-  "Herbivorous_Microbivorous_mites2",
   "Herbivorous_Microbivorous_protozoa",
-  "Detritivorous_Microbivorous_protozoa",
-  "Herbivorous_mites",
   "Herbivorous_tardigrades",
   "Detritivorous_tardigrades",
   "Detritivorous_rotifers1",
@@ -30,7 +25,6 @@ compartments <- c(
   "Detritus"
 )
 representative_taxa <- c(
-  "Gamasellus_racovitzai",
   "Coomansus_gerlachei",
   "Macrobiotus_furgicer",
   "Eudorylaimus_sp.",
@@ -39,11 +33,7 @@ representative_taxa <- c(
   "Cryptopygus_antarcticus",
   "Monogononta",
   "Echiiniscus_capillatus",
-  "Eupodes_minutus",
-  "Ereynetes_macquariensis",
   "Sarcodina",
-  "Mastigophora",
-  "Nanorchestes_antarcticus",
   "Hypsibius_dujardini",
   "Hypsibius_alpinus",
   "Adineta",
@@ -57,46 +47,36 @@ representative_taxa <- c(
 
 # Biomasses mg Dry Mass m-2
 BM = c(
-  5.9,
-  0.2,
-  9.2,
-  13.1,
-  2,
-  15,
-  224.9,
-  5.3,
-  12.6,
+  3.8,
+  7.2,
+  41.3,
   1.7,
-  1,
-  1240,
-  1.5,
-  0.5,
-  12.6,
-  12.6,
-  6.9,
-  13.1,
-  50.8,
-  5.6,
-  604000,
-  8400,
-  33500000
+  13.8,
+  55.5,
+  0.3,
+  28.7,
+  1660,
+  28.7,
+  28.7,
+  24.5,
+  9.1,
+  4.42,
+  0.49,
+  180000,
+  1200,
+  29600000
 )
 
 # Assimilation efficiency
 AE <- c(
   0.8,
   0.8,
-  0.8,
   0.3,
   0.3,
   0.3,
   0.3,
   0.3,
   0.3,
-  0.3,
-  0.3,
-  0.3,
-  1,
   0.3,
   0.3,
   0.3,
@@ -113,8 +93,7 @@ AE <- c(
 GE <- c(
   0.3,
   0.3,
-  0.3,
-  rep(0.4, 17),
+  rep(0.4, 13),
   NA,
   NA,
   NA
@@ -122,26 +101,21 @@ GE <- c(
 
 # Total feeding rate consumers (mg DM m-2 yr-1)
 Qj <- c(
-  50.2,
-  0.7,
-  27.9,
-  232.2,
-  186.1,
-  775.6,
-  6622,
-  197,
-  409.8,
-  275,
-  158.3,
-  182222,
-  16000,
-  54.4,
-  409.8,
-  409.8,
-  256,
-  486,
-  537300,
-  59700,
+  16.6,
+  155.9,
+  677.2,
+  201.1,
+  721.7,
+  1033.33,
+  6.5,
+  829.3,
+  291666.7,
+  829.26,
+  829.26,
+  530.8,
+  197.15,
+  695691.05,
+  38200,
   0,
   0,
   0
@@ -154,57 +128,55 @@ names(Qj) <- compartments
 # Proportion of resource in diet consumer.
 PM <- matrix(
   0,
-  nrow = length(compartments),
-  ncol = length(compartments)
+  nrow = 23,
+  ncol = 23
 )
-rownames(PM) <- compartments
-colnames(PM) <- compartments
 if(T){
-  PM[4, 2]   <- 0.436
-  PM[5, 2]   <- 0.069 #0.0693
-  PM[5, 3]   <- 0.030 #0.0297
-  PM[5, 4]   <- 0.0139
-  PM[6, 2]   <- 0.495
-  PM[6, 3]   <- 0.218
-  PM[6, 4]   <- 0.102
+  PM[4, 2]   <- 0.727
+  PM[5, 2]   <- 0.030 #0.0299
+  PM[5, 3]   <- 0.015 #0.0154
+  PM[5, 4]   <- 0.0114
+  PM[6, 2]   <- 0.243
+  PM[6, 3]   <- 0.125
+  PM[6, 4]   <- 0.092
   PM[7, 1]   <- 0.94
-  PM[9, 3]   <- 0.188
+  PM[9, 3]   <- 0.26 #0.259
   PM[10, 1]  <- 0.04
   PM[11, 1]  <- 0.02
-  PM[12, 4]  <- 0.084
+  PM[12, 4]  <- 0.111
   PM[13, 4]  <- 0.0001
-  PM[15, 3]  <- 0.188
-  PM[16, 3]  <- 0.188
-  PM[17, 8]  <- 0.118
-  PM[18, 3]  <- 0.188
-  PM[18, 8]  <- 0.216
-  PM[19, 4]  <- 0.359
+  PM[15, 3]  <- 0.26 #0.259
+  PM[16, 3]  <- 0.26 #0.259
+  PM[17, 8]  <- 0.09
+  PM[18, 3]  <- 0.08
+  PM[18, 8]  <- 0.243
+  PM[19, 4]  <- 0.3192 #0.319
   PM[19, 6]  <- 1
-  PM[19, 8]  <- 0.3
-  PM[19, 9]  <- 0.3
+  PM[19, 8]  <- 0.301 # 0.3
+  PM[19, 9]  <- 0.3048 #0.3
   PM[19, 12] <- 0.95
   PM[19, 13] <- 0.95
-  PM[20, 4]  <- 0.04
+  PM[20, 4]  <- 0.036
   PM[20, 5]  <- 1
-  PM[20, 7]  <- 0.465
+  PM[20, 7]  <- 0.26
   PM[20, 8]  <- 0.033
   PM[20, 9]  <- 0.033
   PM[20, 10] <- 0.1
   PM[20, 11] <- 0.05
-  PM[21, 4]  <- 0.198
-  PM[21, 9]  <- 0.331
-  PM[22, 4]  <- 0.003 #0.0026
-  PM[22, 7]  <- 0.12
+  PM[21, 4]  <- 0.214
+  PM[21, 9]  <- 0.33
+  PM[22, 4]  <- 0.0014
+  PM[22, 7]  <- 0.18
   PM[22, 8]  <- 0.333
-  PM[22, 9]  <- 0.005
+  PM[22, 9]  <- 0.0022
   PM[22, 10] <- 0.9
   PM[22, 11] <- 0.95
   PM[22, 12] <- 0.05
   PM[22, 14] <- 1
   PM[22, 15] <- 1
-  PM[23, 4]  <- 0.2
-  PM[23, 7]  <- 0.415 #0.414
-  PM[23, 9]  <- 0.331
+  PM[23, 4]  <- 0.215
+  PM[23, 7]  <- 0.56
+  PM[23, 9]  <- 0.33
   PM[23, 13] <- 0.05
   PM[23, 16] <- 1
   PM[23, 17] <- 1
@@ -212,7 +184,9 @@ if(T){
   PM[23, 19] <- 1
   PM[23, 20] <- 1
 }
-
+PM <- PM[-c(1,10,11,13,14),-c(1,10,11,13,14)]
+rownames(PM) <- compartments
+colnames(PM) <- compartments
 
 # Calculate feeding rates with diet proportions
 # *********************************************
@@ -237,7 +211,7 @@ MR <- mortality / BM
 
 # Bundle model data in named lists
 # *******************************
-Antarctic_tundra_dry <- list(
+Antarctic_tundra_wet <- list(
   type = "EF",
   FM = FM,
   BM = BM,
@@ -247,4 +221,4 @@ Antarctic_tundra_dry <- list(
   representative_taxa = representative_taxa
 )
 
-usethis::use_data(Antarctic_tundra_dry, overwrite = TRUE)
+usethis::use_data(Antarctic_tundra_wet, overwrite = TRUE)

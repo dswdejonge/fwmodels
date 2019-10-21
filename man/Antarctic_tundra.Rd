@@ -4,8 +4,9 @@
 \name{Antarctic_tundra}
 \alias{Antarctic_tundra}
 \alias{Antarctic_tundra_dry}
+\alias{Antarctic_tundra_wet}
 \title{Antarctic Tundra}
-\format{A named list with 5 elements:
+\format{A named list with 7 elements:
 \describe{
 \item{\code{type}}{"EF" because it is an energy flux model}
 \item{\code{FM}}{Square flow matrix with named sources (rows) and sinks (columns).
@@ -18,9 +19,13 @@ Fractions. If AE is not relevent the value is set to NA.}
 Fractions. If GE is not relevent the value is set to NA.}
 \item{\code{MR}}{Named numeric vector with mortality rates of all compartments.
 Unit is yr-1.}
+\item{code{representative_taxa}}{Taxonomic groups that are representative for the corresponding
+trophic groups.}
 }}
 \usage{
 Antarctic_tundra_dry
+
+Antarctic_tundra_wet
 }
 \description{
 Material-flux networks of a dry moss turf community (Antarctic dry tundra) and a wet moss

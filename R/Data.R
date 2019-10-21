@@ -6,7 +6,7 @@
 #' death rates.
 #'
 #' @name Lovinkhoeve
-#' @format A named list with 5 elements:
+#' @format A named list with 6 elements:
 #' \describe{
 #' \item{\code{type}}{"EF" because it is an energy flux model}
 #' \item{\code{FM}}{Square flow matrix with named sources (rows) and sinks (columns).
@@ -98,7 +98,7 @@ NULL
 #' death rates.
 #'
 #' @name Antarctic_tundra
-#' @format A named list with 5 elements:
+#' @format A named list with 7 elements:
 #' \describe{
 #' \item{\code{type}}{"EF" because it is an energy flux model}
 #' \item{\code{FM}}{Square flow matrix with named sources (rows) and sinks (columns).
@@ -111,6 +111,8 @@ NULL
 #' Fractions. If GE is not relevent the value is set to NA.}
 #' \item{\code{MR}}{Named numeric vector with mortality rates of all compartments.
 #' Unit is yr-1.}
+#' \item{code{representative_taxa}}{Taxonomic groups that are representative for the corresponding
+#' trophic groups.}
 #' }
 #' @references \itemize{
 #' \item{Davis, R.C., 1981. Structure and Function of Two Antarctic Terrestrial Moss
@@ -175,5 +177,8 @@ NULL
 
 #' @rdname Antarctic_tundra
 "Antarctic_tundra_dry"
+
+#' @rdname Antarctic_tundra
+"Antarctic_tundra_wet"
 
 

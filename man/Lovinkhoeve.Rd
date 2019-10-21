@@ -9,7 +9,7 @@
 \alias{LovinkhoeveIF}
 \alias{LovinkhoeveIF_noDet}
 \title{Lovinkhoeve Experimental Farm}
-\format{A named list with 5 elements:
+\format{A named list with 6 elements:
 \describe{
 \item{\code{type}}{"EF" because it is an energy flux model}
 \item{\code{FM}}{Square flow matrix with named sources (rows) and sinks (columns).
