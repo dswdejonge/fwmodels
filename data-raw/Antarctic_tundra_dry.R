@@ -237,7 +237,7 @@ MR <- mortality / BM
 
 # Bundle model data in named lists
 # *******************************
-Antarctic_tundry_dry <- list(
+Antarctic_tundra_dry <- list(
   type = "EF",
   FM = FM,
   BM = BM,
@@ -255,5 +255,5 @@ Antarctic_tundry_dry <- list(
 #  MR = MR[-1]
 #)
 
-usethis::use_data(Antarctic_tundry_dry, overwrite = TRUE)
+usethis::use_data(Antarctic_tundra_dry, overwrite = TRUE)
 #usethis::use_data(LovinkhoeveIF_noDet, overwrite = TRUE)

@@ -3,7 +3,7 @@
 \docType{data}
 \name{Antarctic_tundra}
 \alias{Antarctic_tundra}
-\alias{Antarctic_tundry_dry}
+\alias{Antarctic_tundra_dry}
 \title{Antarctic Tundra}
 \format{A named list with 5 elements:
 \describe{
@@ -20,7 +20,7 @@ Fractions. If GE is not relevent the value is set to NA.}
 Unit is yr-1.}
 }}
 \usage{
-Antarctic_tundry_dry
+Antarctic_tundra_dry
 }
 \description{
 Material-flux networks of a dry moss turf community (Antarctic dry tundra) and a wet moss

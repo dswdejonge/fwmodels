@@ -174,6 +174,6 @@ NULL
 NULL
 
 #' @rdname Antarctic_tundra
-"Antarctic_tundry_dry"
+"Antarctic_tundra_dry"
 
 
