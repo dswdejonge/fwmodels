@@ -84,8 +84,8 @@ AE <- c(
   0.3,
   1,
   1,
-  NA,
-  NA,
+  1,
+  1,
   NA
 )
 
@@ -94,8 +94,8 @@ GE <- c(
   0.3,
   0.3,
   rep(0.4, 13),
-  NA,
-  NA,
+  1,
+  1,
   NA
 )
 
@@ -124,6 +124,10 @@ names(BM) <- compartments
 names(AE) <- compartments
 names(GE) <- compartments
 names(Qj) <- compartments
+
+# Growth of primary producers mg DM m-2 yr-1
+G <- c(392000, 16800)
+names(G) <- c("Mosses_Lichens_Liverworts", "Algae")
 
 # Proportion of resource in diet consumer.
 PM <- matrix(
@@ -211,9 +215,16 @@ getMortality <- function(FM, AE, GE) {
   return(mortality)
 }
 
+# Mortality of primary producers: G - Fji
+getMortalityPP <- function(FM, G) {
+  mortality <- G - rowSums(FM[names(G),], na.rm = T)
+  return(mortality)
+}
+
 FM <- getFeedingRates(Qj, PM)
 egestion <- getEgestion(FM, AE)
 mortality <- getMortality(FM, AE, GE)
+mortality[names(G)] <- getMortalityPP(FM, G)
 FM[,"Detritus"] <- egestion + mortality
 
 
@@ -230,13 +241,16 @@ Antarctic_tundra_wet <- list(
   BM = BM,
   AE = AE,
   GE = GE,
+  G = G,
   MR = MR,
   representative_taxa = representative_taxa,
+  Qj = Qj,
   PM = PM,
   functions = list(
     getFeedingRates = getFeedingRates,
     getEgestion = getEgestion,
-    getMortality = getMortality
+    getMortality = getMortality,
+    getMortalityPP = getMortalityPP
   )
 )
 

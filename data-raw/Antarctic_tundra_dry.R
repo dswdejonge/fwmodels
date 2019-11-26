@@ -248,7 +248,6 @@ getMortalityPP <- function(FM, G) {
 FM <- getFeedingRates(Qj, PM)
 egestion <- getEgestion(FM, AE)
 mortality <- getMortality(FM, AE, GE)
-# Add mortality for primary producers
 mortality[names(G)] <- getMortalityPP(FM, G)
 FM[,"Detritus"] <- egestion + mortality
 
