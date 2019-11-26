@@ -188,21 +188,34 @@ PM <- PM[-c(1,10,11,13,14),-c(1,10,11,13,14)]
 rownames(PM) <- compartments
 colnames(PM) <- compartments
 
-# Calculate feeding rates with diet proportions
-# *********************************************
+
+# Model functions that result in final flow matrix
+# ***********************************************
+
+# Calculate feeding rates with diet proportions and total feeding rates
 # Flow matrix mg DM m-2 yr-1
-FM <- t(t(PM) * Qj)
+getFeedingRates <- function(Qj, PM) {
+  FM <- t(t(PM) * Qj)
+  return(FM)
+}
 
+# Egestion of all compartments: (1-AE)*Fij
+getEgestion <- function(FM, AE) {
+  egestion <- (1-AE)*colSums(FM, na.rm = T)
+  return(egestion)
+}
 
-# Calculate feedback to detritus
-# ******************************
+# Mortality of all compartments: AE*GE*Fij - Fji
+getMortality <- function(FM, AE, GE) {
+  mortality <- AE*GE*colSums(FM, na.rm = T) - rowSums(FM, na.rm = T)
+  return(mortality)
+}
 
-# Egestion and mortality back into detritus.
-# Egestion is (1-AE)*Fij
-egestion <- (1-AE)*colSums(FM, na.rm = T)
-# Mortality is AE*GE*Fij - Fji
-mortality <- AE*GE*colSums(FM, na.rm = T) - rowSums(FM, na.rm = T)
+FM <- getFeedingRates(Qj, PM)
+egestion <- getEgestion(FM, AE)
+mortality <- getMortality(FM, AE, GE)
 FM[,"Detritus"] <- egestion + mortality
+
 
 # Calculate mortality rates
 # *************************
@@ -218,7 +231,13 @@ Antarctic_tundra_wet <- list(
   AE = AE,
   GE = GE,
   MR = MR,
-  representative_taxa = representative_taxa
+  representative_taxa = representative_taxa,
+  PM = PM,
+  functions = list(
+    getFeedingRates = getFeedingRates,
+    getEgestion = getEgestion,
+    getMortality = getMortality
+  )
 )
 
 usethis::use_data(Antarctic_tundra_wet, overwrite = TRUE)
