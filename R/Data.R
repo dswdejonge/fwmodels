@@ -98,7 +98,7 @@ NULL
 #' death rates, and representative taxa.
 #'
 #' @name Antarctic_tundra
-#' @format A named list with 7 elements:
+#' @format A named list with the elements:
 #' \describe{
 #' \item{\code{type}}{"EF" because it is an energy flux model}
 #' \item{\code{FM}}{Square flow matrix with named sources (rows) and sinks (columns).
@@ -113,6 +113,8 @@ NULL
 #' Unit is yr-1.}
 #' \item{\code{representative_taxa}}{Taxonomic groups that are representative for the corresponding
 #' trophic groups.}
+#' \item{\code{PM}{Square matrix similar to FM with the proportion of each resource (row) in the diet of the consumer (column).}}
+#' \item{\code{functions}{Functions used to derive the flowmatrix.}}
 #' }
 #' @references \itemize{
 #' \item{Davis, R.C., 1981. Structure and Function of Two Antarctic Terrestrial Moss
