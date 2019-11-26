@@ -106,13 +106,15 @@ NULL
 #' \item{\code{BM}}{Named numeric vector with biomasses of all compartments.
 #' Unit is mg DM m-2.}
 #' \item{\code{AE}}{Named numeric vector with assimilation efficiencies of all compartments.
-#' Fractions. If AE is not relevent the value is set to NA.}
+#' Fractions. AE for primary producers is set to 1, and for detritus set to NA.}
 #' \item{\code{GE}}{Named numeric vector with growth efficiencies of all compartments.
-#' Fractions. If GE is not relevent the value is set to NA.}
+#' Fractions. GE for primary producers is set to 1, and for detritus set to NA.}
+#' \item{\code{G}{Named vector with growth of primary producers. Same unit as FM.}}
 #' \item{\code{MR}}{Named numeric vector with mortality rates of all compartments.
 #' Unit is yr-1.}
 #' \item{\code{representative_taxa}}{Taxonomic groups that are representative for the corresponding
 #' trophic groups.}
+#' \item{\code{Qj}{Named vector with consumption rates for all compartments calculated from respiration measurements.}}
 #' \item{\code{PM}{Square matrix similar to FM with the proportion of each resource (row) in the diet of the consumer (column).}}
 #' \item{\code{functions}{Functions used to derive the flowmatrix.}}
 #' }
@@ -153,7 +155,8 @@ NULL
 #' material of Neutel & Thorne 2014).
 #' All consumers feed on detritus, algae, moss, or other consumers. Faecal material, exuviae,
 #' and carcasses from all organisms flow back into the detritus compartment. The moss and algae
-#' compartments are not seen as consumer compartments in this food web model.
+#' compartments are not seen as consumer compartments in this food web model, thus there is no uptake and excretion.
+#' However, they do have a natural mortality rate, which was calculated from their reported growth rates.
 #' \cr
 #' \cr
 #' Consumption rates per consumer (Qj, mg DM m-2 yr-2) was calculated as
