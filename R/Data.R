@@ -134,7 +134,7 @@ NULL
 #' community (\code{Antarctic_tundra_dry}) and a wet moss carpet community
 #' (\code{Antarctic_tundra_wet}).
 #' It is a material flux network, with fluxes in the unit milligram dry mass per square meter
-#' per year (mg DM m-2 yr-1). Conversion from material to energy fluxes was heavility dependent
+#' per year (mg DM m-2 yr-1). Conversion from material to energy fluxes was heaviliy dependent
 #' on assumptions and broad extrapolation, and therefore not undertaken.
 #' The data for these models was collected on Signy Island, South Orkney Islands.
 #' The communities are relatively simple networks with poorly developed trophic structure.
@@ -163,9 +163,9 @@ NULL
 #' \cr
 #' \cr
 #' Consumption of resource i by consumer j (Fij) was calculated using diet proportions:
-#' $Fij = pijQj$, where pij is the diet proportion of i in the diet of j. The given diet
-#' proportions in Neutel & Thorne (2014) did not always exactly add up to one.
-#' In those cases rounding error were assumed and fixed before calculating the consumption fluxes.
+#' $Fij = pijQj$, where pij is the diet proportion of i in the diet of j. Note that the given diet
+#' proportions in Neutel & Thorne (2014) do not always exactly add up to one, probably due to rounding.
+#' These small discrepencies were left in the dataset to stay close to the published data.
 #' \cr
 #' \cr
 #' Feedback back to detritus was the sum of egestion and non-predatory mortality of all
