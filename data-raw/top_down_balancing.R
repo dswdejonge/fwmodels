@@ -18,5 +18,11 @@ topDownBalancing <- function(PM, MR, BM, AE, GE){
     N <- which(rowSums(left) == 0)
     N <- N[!N %in% finished]
   }
-   return(FM)
+  # Set all NA, NaN, and NULL values to 0
+  FM[which(is.na(FM)|is.nan(FM)|is.null(FM))] <- 0
+  return(FM)
+}
+
+detritusFeedback <- function(FM, AE, MR, BM){
+  to_detritus <- (1-AE)*colSums(FM) + MR*BM
 }

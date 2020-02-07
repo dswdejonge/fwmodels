@@ -248,8 +248,8 @@ colnames(FM2) <- compartments
 # but useful to include in the Flow matrix as flows from compartments
 # back into detritus.
 # Feedback to detritus is excretion (1-AE)*consumption plus mortality MR * BM.
-FM[,"Detritus"] <- (1-AE)*colSums(FM) + MR*BM
-FM2[,"Detritus"] <- (1-AE)*colSums(FM2) + MR*BM
+FM[,"Detritus"] <- detritusFeedback(FM=FM, AE=AE, BM=BM, MR=MR)
+FM2[,"Detritus"] <- detritusFeedback(FM=FM2, AE=AE, BM=BM, MR=MR)
 
 
 

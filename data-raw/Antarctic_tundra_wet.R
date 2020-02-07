@@ -226,7 +226,7 @@ egestion <- getEgestion(FM, AE)
 mortality <- getMortality(FM, AE, GE)
 mortality[names(G)] <- getMortalityPP(FM, G)
 FM[,"Detritus"] <- egestion + mortality
-
+FM[which(is.na(FM)|is.nan(FM)|is.null(FM))] <- 0
 
 # Calculate mortality rates
 # *************************
