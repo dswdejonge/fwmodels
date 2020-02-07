@@ -248,10 +248,29 @@ colnames(FM2) <- compartments
 # but useful to include in the Flow matrix as flows from compartments
 # back into detritus.
 # Feedback to detritus is excretion (1-AE)*consumption plus mortality MR * BM.
-FM[,"Detritus"] <- detritusFeedback(FM=FM, AE=AE, BM=BM, MR=MR)
-FM2[,"Detritus"] <- detritusFeedback(FM=FM2, AE=AE, BM=BM, MR=MR)
+toDetritus <- detritusFeedback(FM=FM, AE=AE, BM=BM, MR=MR)
+toDetritus2 <- detritusFeedback(FM=FM2, AE=AE, BM=BM, MR=MR)
+FM[,"Detritus"] <- rowSums(toDetritus, na.rm = T)
+FM2[,"Detritus"] <- rowSums(toDetritus2, na.rm = T)
 
+# What fraction of each flow to detritus is excretion?
+frac <- matrix(0, dim(FM)[1], dim(FM)[2])
+colnames(frac) <- colnames(FM) ; rownames(frac) <- rownames(FM)
+frac[,"Detritus"] <- toDetritus[,"excretion"] / FM[,"Detritus"]
+frac[which(is.nan(frac))] <- 0
+dead <- list(
+  names = "Detritus",
+  frac = frac
+)
 
+frac2 <- matrix(0, dim(FM)[1], dim(FM)[2])
+colnames(frac2) <- colnames(FM2) ; rownames(frac2) <- rownames(FM2)
+frac2[,"Detritus"] <- toDetritus2[,"excretion"] / FM2[,"Detritus"]
+frac2[which(is.nan(frac2))] <- 0
+dead2 <- list(
+  names = "Detritus",
+  frac = frac2
+)
 
 # Bundle model data in named lists
 # *******************************
@@ -263,7 +282,8 @@ LovinkhoeveCP <- list(
   BM = BM,
   AE = AE,
   GE = GE,
-  MR = MR
+  MR = MR,
+  dead = dead
 )
 
 ## Values from figure
@@ -273,7 +293,8 @@ LovinkhoeveCP2 <- list(
   BM = BM,
   AE = AE,
   GE = GE,
-  MR = MR
+  MR = MR,
+  dead = dead2
 )
 
 ## Model without detritus

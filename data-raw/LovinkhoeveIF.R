@@ -192,9 +192,19 @@ FM <- topDownBalancing(PM, MR, BM, AE, GE)
 # but useful to include in the Flow matrix as flows from compartments
 # back into detritus.
 # Feedback to detritus is excretion (1-AE)*consumption plus mortality MR * BM.
-FM[,"Detritus"] <- (1-AE)*colSums(FM) + MR*BM
+#FM[,"Detritus"] <- (1-AE)*colSums(FM) + MR*BM
+toDetritus <- detritusFeedback(FM=FM, AE=AE, BM=BM, MR=MR)
+FM[,"Detritus"] <- rowSums(toDetritus, na.rm = T)
 
-
+# What fraction of each flow to detritus is excretion?
+frac <- matrix(0, dim(FM)[1], dim(FM)[2])
+colnames(frac) <- colnames(FM) ; rownames(frac) <- rownames(FM)
+frac[,"Detritus"] <- toDetritus[,"excretion"] / FM[,"Detritus"]
+frac[which(is.nan(frac))] <- 0
+dead <- list(
+  names = "Detritus",
+  frac = frac
+)
 
 
 # Bundle model data in named lists
@@ -205,7 +215,8 @@ LovinkhoeveIF <- list(
   BM = BM,
   AE = AE,
   GE = GE,
-  MR = MR
+  MR = MR,
+  dead = dead
 )
 # Exclude detritus for simpler model
 LovinkhoeveIF_noDet <- list(

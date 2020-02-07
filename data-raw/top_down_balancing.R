@@ -23,6 +23,12 @@ topDownBalancing <- function(PM, MR, BM, AE, GE){
   return(FM)
 }
 
+# detritus production is excretion and mortality
 detritusFeedback <- function(FM, AE, MR, BM){
-  to_detritus <- (1-AE)*colSums(FM) + MR*BM
+  excretion <- (1-AE)*colSums(FM)
+  mortality <- MR*BM
+  to_detritus <- matrix(c(excretion, mortality), nrow = length(excretion), ncol = 2)
+  to_detritus[which(is.na(to_detritus))] <- 0
+  colnames(to_detritus) <- c("excretion", "mortality")
+  return(to_detritus)
 }
