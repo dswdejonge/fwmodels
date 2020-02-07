@@ -9,7 +9,7 @@
 \alias{LovinkhoeveIF}
 \alias{LovinkhoeveIF_noDet}
 \title{Lovinkhoeve Experimental Farm}
-\format{A named list with 6 elements:
+\format{A named list with the following elements:
 \describe{
 \item{\code{type}}{"EF" because it is an energy flux model}
 \item{\code{FM}}{Square flow matrix with named sources (rows) and sinks (columns).
@@ -22,6 +22,11 @@ Fractions. If AE is not relevent (i.e. detritus and roots) the value is set to N
 Fractions. If GE is not relevent (i.e. detritus and roots) the value is set to NA.}
 \item{\code{MR}}{Named numeric vector with mortality rates of all compartments.
 Unit is yr-1.}
+\item{\code{dead}}{A names list with the element 'names', that includes a character vector
+with all names of non-living compartments (detritus, nutrients, etc.) and the element 'frac', that
+includes a named matrix in the same format as FM that includes the fraction of each flow that
+solely comprises of excretion (so if 60% of a flux to detritus is excretion, and 40% is mortality,
+the value for this flux in the matrix is 0.6)}
 }}
 \usage{
 LovinkhoeveCP
