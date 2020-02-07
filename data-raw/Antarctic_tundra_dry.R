@@ -251,6 +251,15 @@ mortality <- getMortality(FM, AE, GE)
 mortality[names(G)] <- getMortalityPP(FM, G)
 FM[,"Detritus"] <- egestion + mortality
 FM[which(is.na(FM)|is.nan(FM)|is.null(FM))] <- 0
+# A matrix with the fraction of the detritus flux that is excretion
+frac <- matrix(0, dim(FM)[1], dim(FM)[2])
+colnames(frac) <- colnames(FM) ; rownames(frac) <- rownames(FM)
+frac[,"Detritus"] <- egestion / FM[,"Detritus"]
+frac[which(is.na(frac)|is.nan(frac))] <- 0
+dead <- list(
+  names = "Detritus",
+  frac = frac
+)
 
 # Calculate mortality rates
 # *************************
@@ -267,6 +276,7 @@ Antarctic_tundra_dry <- list(
   GE = GE,
   G = G,
   MR = MR,
+  dead = dead,
   representative_taxa = representative_taxa,
   Qj = Qj,
   PM = PM,
