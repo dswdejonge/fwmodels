@@ -1,2 +1,7 @@
 # fwmodels
-Collection of published food web models
+Collection of published energy-flux food-web models.
+
+# Installation
+```r
+devtools::install_github("dswdejonge/fwmodels")
+```

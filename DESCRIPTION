@@ -2,15 +2,14 @@ Package: fwmodels
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Danielle",
+           family = "de Jonge",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "mail@dswdejonge.com")
+Description: The fwmodels package contains published energy-flux food-web models. These models are used for the tutorials in the fwstability package.
+License: GNU GPL 3.0
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1.9000
+RoxygenNote: 7.0.2
 Suggests: 
     testthat
